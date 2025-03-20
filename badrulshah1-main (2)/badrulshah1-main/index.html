@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio of Muhammad Badrul Shah</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2d3436',
+                        secondary: '#0984e3',
+                        accent: '#00b894',
+                    },
+                    fontFamily: {
+                        poppins: ['Poppins', 'sans-serif'],
+                    },
+                    animation: {
+                        'spin-slow': 'spin 4s linear infinite',
+                        'fade-in-up': 'fadeInUp 0.8s ease-out',
+                        'float': 'float 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': {
+                                opacity: '0',
+                                transform: 'translateY(20px)'
+                            },
+                            '100%': {
+                                opacity: '1',
+                                transform: 'translateY(0)'
+                            },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Minimal custom CSS for effects that Tailwind doesn't handle well */
+        .gradient-text {
+            background: linear-gradient(45deg, #fff, #00b894);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='rgba(255,255,255,0.1)' d='M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: bottom;
+            background-size: cover;
+        }
+        
+        .profile-glow::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            background: linear-gradient(45deg, #00b894, #0984e3) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: destination-out;
+            mask-composite: exclude;
+            animation: rotate 4s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .glass {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        .shine::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: 0.5s;
+        }
+        
+        .shine:hover::before {
+            transform: translateX(100%);
+        }
+
+        /* New styles for added features */
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, #0984e3, transparent);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #0984e3;
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .timeline-item:nth-child(odd)::before {
+            right: -60px;
+        }
+
+        .timeline-item:nth-child(even)::before {
+            left: -60px;
+        }
+
+        .skill-progress {
+            transition: width 1.5s ease-in-out;
+        }
+
+        .swiper {
+            width: 100%;
+            padding-top: 50px;
+            padding-bottom: 50px;
+        }
+
+        .swiper-slide {
+            background-position: center;
+            background-size: cover;
+            width: 300px;
+            height: 300px;
+        }
+
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .floating-action-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .floating-action-button:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body class="font-poppins bg-gradient-to-br from-slate-50 to-slate-200 text-gray-800 min-h-screen">
+    <!-- Header -->
+    <header class="fixed w-full top-0 z-50 backdrop-blur-md bg-primary/80 text-white py-4 px-6 md:px-10 flex justify-between items-center shadow-lg border-b border-white/10">
+        <h1 class="text-2xl font-bold gradient-text">Muhammad Badrul Shah</h1>
+        <nav class="relative z-50">
+            <div class="md:hidden text-2xl cursor-pointer menu-icon">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="navlist md:flex md:flex-row flex-col md:static fixed top-[72px] -right-full md:right-auto w-full md:w-auto md:h-auto h-[calc(100vh-72px)] bg-primary/95 md:bg-transparent backdrop-blur-md md:backdrop-blur-0 md:space-x-8 md:p-0 p-10 transition-all duration-300 ease-in-out">
+                <li class="mb-6 md:mb-0"><a href="#home" class="relative py-2 px-4 inline-block text-white hover:text-white group transition-all duration-300 w-full md:w-auto">
+                    <span class="absolute inset-0 w-full h-full transition duration-300 ease-out transform translate-x-0 -skew-x-12 bg-secondary group-hover:bg-accent group-hover:skew-x-12 opacity-20 group-hover:opacity-30 rounded-lg"></span>
+                    <span class="absolute inset-0 w-full h-full transition duration-300 ease-out transform skew-x-12 bg-accent group-hover:bg-secondary group-hover:-skew-x-12 opacity-0 group-hover:opacity-20 rounded-lg"></span>
+                    <span class="relative">Home</span>
+                </a></li>
+                <li class="mb-6 md:mb-0"><a href="#about" class="relative py-2 px-4 inline-block text-white hover:text-white group transition-all duration-300 w-full md:w-auto">
+                    <span class="absolute inset-0 w-full h-full transition duration-300 ease-out transform translate-x-0 -skew-x-12 bg-secondary group-hover:bg-accent group-hover:skew-x-12 opacity-20 group-hover:opacity-30 rounded-lg"></span>
+                    <span class="absolute inset-0 w-full h-full transition duration-300 ease-out transform skew-x-12 bg-accent group-hover:bg-secondary group-hover:-skew-x-12 opacity-0 group-hover:opacity-20 rounded-lg"></span>
+                    <span class="relative">About</span>
+                </a></li>
+                <li class="mb-6 md:mb-0"><a href="#skills" class="relative py-2 px-4 inline-block text-white hover:text-white group transition-all duration-300 w-full md:w-auto">
+                    <span class="absolute inset-0 w-full h-full transition duration-300 ease-out transform translate-x-0 -skew-x-12 bg-secondary group-hover:bg-accent group-hover:skew-x-12 opacity-20 group-hover:opacity-30 rounded-lg"></span>
+                    <span class="absolute inset-0 w-full h-full transition duration-300 ease-out transform skew-x-12 bg-accent group-hover:bg-secondary group-hover:-skew-x-12 opacity-0 group-hover:opacity-20 rounded-lg"></span>
+                    <span class="relative">Skills</span>
+                </a></li>
+                <li class="mb-6 md:mb-0"><a href="#projects" class="relative py-2 px-4 inline-block text-white hover:text-white group transition-all duration-300 w-full md:w-auto">
+                    <span class="absolute inset-0 w-full h-full transition duration-300 ease-out transform translate-x-0 -skew-x-12 bg-secondary group-hover:bg-accent group-hover:skew-x-12 opacity-20 group-hover:opacity-30 rounded-lg"></span>
+                    <span class="absolute inset-0 w-full h-full transition duration-300 ease-out transform skew-x-12 bg-accent group-hover:bg-secondary group-hover:-skew-x-12 opacity-0 group-hover:opacity-20 rounded-lg"></span>
+                    <span class="relative">Projects</span>
+                </a></li>
+                <li class="mb-6 md:mb-0"><a href="#contact" class="relative py-2 px-4 inline-block text-white hover:text-white group transition-all duration-300 w-full md:w-auto">
+                    <span class="absolute inset-0 w-full h-full transition duration-300 ease-out transform translate-x-0 -skew-x-12 bg-secondary group-hover:bg-accent group-hover:skew-x-12 opacity-20 group-hover:opacity-30 rounded-lg"></span>
+                    <span class="absolute inset-0 w-full h-full transition duration-300 ease-out transform skew-x-12 bg-accent group-hover:bg-secondary group-hover:-skew-x-12 opacity-0 group-hover:opacity-20 rounded-lg"></span>
+                    <span class="relative">Contact</span>
+                </a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section with Particles -->
+    <section id="home" class="pt-40 pb-24 md:pt-48 md:pb-32 bg-gradient-to-br from-primary to-secondary text-white text-center relative overflow-hidden hero-pattern">
+        <div id="particles-js"></div>
+        <div class="container mx-auto px-6 relative z-10 max-w-5xl hero-content">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight">Welcome to My <span class="gradient-text">Portfolio</span></h1>
+            <p class="text-lg md:text-xl max-w-2xl mx-auto opacity-90">I'm a passionate developer creating beautiful and functional web experiences</p>
+            <div class="mt-10 relative inline-block">
+                <img src="portbad/badrulpic.jpeg" alt="Muhammad Badrul Shah" class="w-40 h-40 md:w-48 md:h-48 rounded-full border-4 border-white/30 object-cover shadow-2xl transition-transform duration-300 hover:scale-105 profile-glow relative z-10">
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 md:py-28">
+        <div class="container mx-auto px-6 max-w-5xl">
+            <div class="glass rounded-3xl p-8 md:p-12 shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 relative pb-4 after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-20 after:h-1 after:bg-gradient-to-r after:from-secondary after:to-accent after:rounded-full">About Me</h2>
+                <div class="prose prose-lg max-w-3xl mx-auto text-center">
+                    <p class="text-lg md:text-xl text-gray-700">I am a dedicated web developer with a passion for creating beautiful and functional websites. With expertise in modern web technologies, I strive to deliver exceptional user experiences.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 md:py-28 bg-gray-50/50">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-14 relative pb-4 after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-20 after:h-1 after:bg-gradient-to-r after:from-secondary after:to-accent after:rounded-full">My Skills</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+                <div class="glass rounded-2xl p-8 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-xl shine relative overflow-hidden">
+                    <div class="mb-6 overflow-hidden rounded-xl">
+                        <img src="portbad/code.jpg" alt="Web Development" class="w-full h-40 object-cover rounded-xl transition-transform duration-300 hover:scale-105">
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-4 flex items-center">
+                        <i class="fas fa-code text-secondary mr-3"></i>
+                        Web Development
+                    </h3>
+                    <p class="text-gray-600">HTML, CSS, JavaScript, React, Node.js</p>
+                </div>
+                <div class="glass rounded-2xl p-8 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-xl shine relative overflow-hidden">
+                    <div class="mb-6 overflow-hidden rounded-xl">
+                        <img src="portbad/photoshop.jpg" alt="UI/UX Design" class="w-full h-40 object-cover rounded-xl transition-transform duration-300 hover:scale-105">
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-4 flex items-center">
+                        <i class="fas fa-paint-brush text-secondary mr-3"></i>
+                        UI/UX Design
+                    </h3>
+                    <p class="text-gray-600">Figma, Adobe XD, Responsive Design</p>
+                </div>
+                <div class="glass rounded-2xl p-8 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-xl shine relative overflow-hidden lg:col-span-1 md:col-span-2 lg:col-auto">
+                    <div class="mb-6 overflow-hidden rounded-xl">
+                        <img src="portbad/database.jpg" alt="Database Management" class="w-full h-40 object-cover rounded-xl transition-transform duration-300 hover:scale-105">
+                    </div>
+                    <h3 class="text-xl font-bold text-primary mb-4 flex items-center">
+                        <i class="fas fa-database text-secondary mr-3"></i>
+                        Database Management
+                    </h3>
+                    <p class="text-gray-600">MySQL, MongoDB, SQL Server</p>
+                </div>
+            </div>
+
+            <!-- Skills Progress Bars -->
+            <div class="glass rounded-2xl p-8 shadow-lg">
+                <h3 class="text-2xl font-bold text-primary mb-6">Technical Expertise</h3>
+                <div class="space-y-6">
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">HTML/CSS</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="h-2 bg-gray-200 rounded-full">
+                            <div class="h-full bg-gradient-to-r from-secondary to-accent rounded-full skill-progress" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">JavaScript</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="h-2 bg-gray-200 rounded-full">
+                            <div class="h-full bg-gradient-to-r from-secondary to-accent rounded-full skill-progress" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">React</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="h-2 bg-gray-200 rounded-full">
+                            <div class="h-full bg-gradient-to-r from-secondary to-accent rounded-full skill-progress" style="width: 80%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">Node.js</span>
+                            <span>75%</span>
+                        </div>
+                        <div class="h-2 bg-gray-200 rounded-full">
+                            <div class="h-full bg-gradient-to-r from-secondary to-accent rounded-full skill-progress" style="width: 75%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="py-20 md:py-28">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-14 relative pb-4 after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-20 after:h-1 after:bg-gradient-to-r after:from-secondary after:to-accent after:rounded-full">My Journey</h2>
+            <div class="timeline relative">
+                <div class="timeline-item glass rounded-2xl p-6 mb-8 w-1/2 ml-auto">
+                    <h3 class="text-xl font-bold text-primary mb-2">2024</h3>
+                    <p class="text-gray-600">Started working on advanced web development projects</p>
+                </div>
+                <div class="timeline-item glass rounded-2xl p-6 mb-8 w-1/2">
+                    <h3 class="text-xl font-bold text-primary mb-2">2023</h3>
+                    <p class="text-gray-600">Completed major portfolio projects and certifications</p>
+                </div>
+                <div class="timeline-item glass rounded-2xl p-6 mb-8 w-1/2 ml-auto">
+                    <h3 class="text-xl font-bold text-primary mb-2">2022</h3>
+                    <p class="text-gray-600">Began learning modern web technologies</p>
+                </div>
+                <div class="timeline-item glass rounded-2xl p-6 w-1/2">
+                    <h3 class="text-xl font-bold text-primary mb-2">2021</h3>
+                    <p class="text-gray-600">Started my web development journey</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20 md:py-28 bg-gray-50/50">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-14 relative pb-4 after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-20 after:h-1 after:bg-gradient-to-r after:from-secondary after:to-accent after:rounded-full">Testimonials</h2>
+            <div class="swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide glass rounded-2xl p-8">
+                        <div class="flex items-center mb-6">
+                            <img src="portbad/badrulpic.jpeg" alt="Client" class="w-16 h-16 rounded-full object-cover mr-4">
+                            <div>
+                                <h4 class="font-bold text-primary">John Doe</h4>
+                                <p class="text-gray-600">CEO, Tech Corp</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700">"Muhammad is an exceptional developer who delivered beyond our expectations. His attention to detail and technical expertise are outstanding."</p>
+                    </div>
+                    <div class="swiper-slide glass rounded-2xl p-8">
+                        <div class="flex items-center mb-6">
+                            <img src="portbad/badrulpic.jpeg" alt="Client" class="w-16 h-16 rounded-full object-cover mr-4">
+                            <div>
+                                <h4 class="font-bold text-primary">Jane Smith</h4>
+                                <p class="text-gray-600">Designer, Creative Studio</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700">"Working with Muhammad was a pleasure. His collaborative approach and technical skills made our project a success."</p>
+                    </div>
+                    <div class="swiper-slide glass rounded-2xl p-8">
+                        <div class="flex items-center mb-6">
+                            <img src="portbad/badrulpic.jpeg" alt="Client" class="w-16 h-16 rounded-full object-cover mr-4">
+                            <div>
+                                <h4 class="font-bold text-primary">Mike Johnson</h4>
+                                <p class="text-gray-600">Founder, StartupX</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700">"Muhammad's expertise in web development helped us create a stunning and functional website that exceeded our expectations."</p>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 md:py-28">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-14 relative pb-4 after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-20 after:h-1 after:bg-gradient-to-r after:from-secondary after:to-accent after:rounded-full">My Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+                <div class="glass rounded-2xl overflow-hidden shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-xl group">
+                    <div class="overflow-hidden">
+                        <img src="portbad/database.jpg" alt="Database Project" class="w-full h-56 object-cover transition-transform duration-500 group-hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-primary mb-3">Database Management</h3>
+                        <p class="text-gray-600 mb-5">A comprehensive database management system</p>
+                        <a href="#" class="inline-block px-6 py-3 bg-gradient-to-r from-secondary to-accent text-white rounded-lg font-medium transition-all duration-300 hover:shadow-lg hover:-translate-y-1">View Project</a>
+                    </div>
+                </div>
+                <div class="glass rounded-2xl overflow-hidden shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-xl group">
+                    <div class="overflow-hidden">
+                        <img src="portbad/instagraham.JPG" alt="Instagraham" class="w-full h-56 object-cover transition-transform duration-500 group-hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-primary mb-3">Instagraham</h3>
+                        <p class="text-gray-600 mb-5">A website where users can upload photos, comment, sign up, and interact</p>
+                        <a href="#" class="inline-block px-6 py-3 bg-gradient-to-r from-secondary to-accent text-white rounded-lg font-medium transition-all duration-300 hover:shadow-lg hover:-translate-y-1">View Project</a>
+                    </div>
+                </div>
+                <div class="glass rounded-2xl overflow-hidden shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-xl group lg:col-span-1 md:col-span-2 lg:col-auto">
+                    <div class="overflow-hidden">
+                        <img src="portbad/mcdonalds.JPG" alt="McDonald's" class="w-full h-56 object-cover transition-transform duration-500 group-hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-primary mb-3">McDonald's</h3>
+                        <p class="text-gray-600 mb-5">Interactive McDonald's website with login, video uploads, and mini-games</p>
+                        <a href="#" class="inline-block px-6 py-3 bg-gradient-to-r from-secondary to-accent text-white rounded-lg font-medium transition-all duration-300 hover:shadow-lg hover:-translate-y-1">View Project</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 md:py-28 bg-gray-50/50">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <div class="glass rounded-3xl p-8 md:p-12 shadow-xl">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 relative pb-4 after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:w-20 after:h-1 after:bg-gradient-to-r after:from-secondary after:to-accent after:rounded-full">Contact Me</h2>
+                <form class="mt-10 space-y-6">
+                    <div>
+                        <input type="text" placeholder="Your Name" required class="w-full px-5 py-4 rounded-xl border border-gray-200 bg-white/80 focus:border-secondary focus:ring focus:ring-secondary/20 transition-all duration-300 outline-none">
+                    </div>
+                    <div>
+                        <input type="email" placeholder="Your Email" required class="w-full px-5 py-4 rounded-xl border border-gray-200 bg-white/80 focus:border-secondary focus:ring focus:ring-secondary/20 transition-all duration-300 outline-none">
+                    </div>
+                    <div>
+                        <textarea placeholder="Your Message" rows="5" required class="w-full px-5 py-4 rounded-xl border border-gray-200 bg-white/80 focus:border-secondary focus:ring focus:ring-secondary/20 transition-all duration-300 outline-none"></textarea>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="px-8 py-4 bg-gradient-to-r from-secondary to-accent text-white rounded-xl font-medium text-lg transition-all duration-300 hover:shadow-lg hover:-translate-y-1 focus:ring focus:ring-secondary/50">Send Message</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating Action Button -->
+    <div class="floating-action-button">
+        <a href="#home" class="bg-gradient-to-r from-secondary to-accent text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300">
+            <i class="fas fa-arrow-up"></i>
+        </a>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white py-8 relative">
+        <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-secondary to-accent"></div>
+        <div class="container mx-auto px-6 text-center">
+            <div class="social-links flex justify-center gap-6 mb-6">
+                <a href="#" class="text-2xl hover:text-accent transition-all duration-300 hover:-translate-y-1"><i class="fab fa-github"></i></a>
+                <a href="#" class="text-2xl hover:text-accent transition-all duration-300 hover:-translate-y-1"><i class="fab fa-linkedin"></i></a>
+                <a href="#" class="text-2xl hover:text-accent transition-all duration-300 hover:-translate-y-1"><i class="fab fa-twitter"></i></a>
+            </div>
+            <p class="text-gray-300">&copy; 2024 Muhammad Badrul Shah. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuIcon = document.querySelector('.menu-icon');
+        const navlist = document.querySelector('.navlist');
+        let isMenuOpen = false;
+        
+        function toggleMenu() {
+            isMenuOpen = !isMenuOpen;
+            if (isMenuOpen) {
+                navlist.classList.remove('-right-full');
+                navlist.classList.add('right-0');
+                menuIcon.innerHTML = '<i class="fas fa-times"></i>';
+            } else {
+                navlist.classList.remove('right-0');
+                navlist.classList.add('-right-full');
+                menuIcon.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        }
+
+        menuIcon.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleMenu();
+        });
+
+        // Close menu when clicking a link
+        navlist.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (isMenuOpen) {
+                    toggleMenu();
+                }
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (isMenuOpen && !navlist.contains(e.target) && !menuIcon.contains(e.target)) {
+                toggleMenu();
+            }
+        });
+
+        // Prevent clicks inside the menu from closing it
+        navlist.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    // Close mobile menu if open
+                    navlist.classList.add('-right-full');
+                    navlist.classList.remove('right-0');
+                    
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animate on scroll with Intersection Observer
+        const animateElements = document.querySelectorAll('.glass, .container > div');
+        
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in-up');
+                    entry.target.style.opacity = '1';
+                }
+            });
+        }, observerOptions);
+
+        animateElements.forEach(el => {
+            el.style.opacity = '0';
+            observer.observe(el);
+        });
+
+        // Initialize Swiper
+        const swiper = new Swiper('.swiper', {
+            effect: 'coverflow',
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: 'auto',
+            coverflowEffect: {
+                rotate: 50,
+                stretch: 0,
+                depth: 100,
+                modifier: 1,
+                slideShadows: true,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+
+        // Initialize Particles.js
+        particlesJS('particles-js', {
+            particles: {
+                number: {
+                    value: 80,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: {
+                    value: '#ffffff'
+                },
+                shape: {
+                    type: 'circle'
+                },
+                opacity: {
+                    value: 0.5,
+                    random: false
+                },
+                size: {
+                    value: 3,
+                    random: true
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: '#ffffff',
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 6,
+                    direction: 'none',
+                    random: false,
+                    straight: false,
+                    out_mode: 'out',
+                    bounce: false
+                }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: 'repulse'
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: 'push'
+                    },
+                    resize: true
+                }
+            },
+            retina_detect: true
+        });
+
+        // Animate skill progress bars on scroll
+        const skillBars = document.querySelectorAll('.skill-progress');
+        
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.width = entry.target.getAttribute('data-width');
+                }
+            });
+        }, { threshold: 0.5 });
+
+        skillBars.forEach(bar => {
+            const width = bar.style.width;
+            bar.style.width = '0';
+            bar.setAttribute('data-width', width);
+            skillObserver.observe(bar);
+        });
+    </script>
+</body>
+</html>
